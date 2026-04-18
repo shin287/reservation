@@ -1,0 +1,27 @@
+<h1>施設予約</h1>
+
+<p>施設名： <%= @room.name %></p>
+<p>紹介文： <%= @room.introduction %></p>
+<p>料金： <%= @room.price %></p>
+
+<% if @reservation.errors.any? %>
+  <ul>
+    <% @reservation.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: [@room, @reservation] do |f| %>
+  <p>チェックイン</p>
+  <%= f.date_field :check_in %>
+
+  <p>チェックアウト</p>
+  <%= f.date_field :check_out %>
+
+  <p>人数</p>
+  <%= f.number_field :people %>
+
+  <br>
+  <%= f.submit "予約する" %>
+<% end %>

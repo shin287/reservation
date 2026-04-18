@@ -1,0 +1,36 @@
+<h1>アカウント編集</h1>
+
+<% if @user.errors.any? %>
+  <ul>
+    <%= @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+<%= form_with model: @user, local: true do |f| %>
+  <div>
+    <%= f.label :email, "メールアドレス" %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, "新しいパスワード" %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "確認用パスワード" %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= f.submit "更新する" %>
+  </div>
+<% end %>
+
+  <p><%= link_to "マイページへ戻る", user_path(@user) %></p>

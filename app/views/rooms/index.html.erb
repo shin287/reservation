@@ -1,0 +1,14 @@
+<h1>施設一覧</h1>
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+<% @rooms.each do |room| %>
+  <p>施設名：<%= link_to room.name, room_path(room) %></p>
+  <p>紹介文：<%= room.introduction %></p>
+  <p>料金：<%= room.price %></p>
+  <p>作成日：<%= room.created_at.strftime("%Y/%m/%d") %></p>
+  <hr>
+<% end %>
+
+<%= link_to "施設を登録", new_room_path %>

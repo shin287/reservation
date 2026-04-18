@@ -1,0 +1,42 @@
+<h1>マイページ</h1>
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar, size: "100x100"  %>
+<% else %>
+  <%= image_tag "default.png", size: "100x100" %>
+<% end %>
+
+<p>名前： <%= @user.name %></p>
+<p>メールアドレス： <%= @user.email %></p>
+<p>パスワード： ********</p>
+<p>自己紹介： <%= @user.introduction %></p>
+
+<% if @user.rooms.exists? %>
+  <p><%= link_to "施設一覧へ", rooms_path %></p>
+<% end %>
+<p><%= link_to "アカウント編集", edit_user_path(@user) %></p>
+<p><%= link_to "プロフィール編集", edit_profile_path %></p>
+<%= link_to "施設を登録", new_room_path %>
+<p><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %></p>
+
+<h2>予約一覧</h2>
+
+<% @reservations.each do |reservation| %>
+  <hr>
+
+  <% if reservation.room.image.attached? %>
+    <%= image_tag reservation.room.image, size: "150x100" %>
+  <% else %>
+    <%= image_tag "default.png", size: "150x100" %>
+  <% end %>
+
+  <p>施設名： <%= reservation.room.name %></p>
+  <p>紹介文： <%= reservation.room.introduction %></p>
+  <p>合計料金： <%= reservation.total_price %></p>
+  <p>チェックイン： <%= reservation.check_in %></p>
+  <p>チェックアウト： <%= reservation.check_out %></p>
+  <p>予約確定日時： <%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+<% end %>

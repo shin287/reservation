@@ -1,0 +1,24 @@
+<h1>施設詳細</h1>
+
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+<% if @room.image.attached? %>
+  <%= image_tag @room.image, size: "200x150" %>
+<% else %>
+  <%= image_tag "default.png", size: "200x150" %>
+<% end %>
+
+<p>施設名：<%= @room.name %></p>
+<p>紹介文：<%= @room.introduction %></p>
+<p>料金：<%= @room.price %></p>
+<p>住所：<%= @room.address %></p>
+
+<p><%= link_to "予約する", new_room_reservation_path(@room) %></p>
+<p><%= link_to "一覧へ戻る", rooms_path %></p>
+<br>
+<% if @room.user == current_user %>
+  <p><%= link_to "編集する", edit_room_path(@room) %></p>
+  <p><%= link_to "削除する", room_path(@room), data: {turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %></p>
+<% end %>

@@ -1,0 +1,30 @@
+<h1>施設登録</h1>
+
+<% if @room.errors.any? %>
+  <ul>
+    <% @room.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @room do |f| %>
+  <p>施設画像</p>
+  <%= f.file_field :image %>
+
+  <p>名前</p>
+  <%= f.text_field :name %>
+
+  <p>紹介文</p>
+  <%= f.text_area :introduction %>
+
+  <p>料金</p>
+  <%= f.number_field :price %>
+
+  <p>住所</p>
+  <%= f.text_field :address %>
+
+  <br>
+  <%= f.submit "登録" %>
+<% end %>
+
