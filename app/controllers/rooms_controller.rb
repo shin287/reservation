@@ -1,7 +1,24 @@
 class RoomsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, except: [:index, :show]
 
   def index
+    @rooms = Room.all
+
+    if params[:area].present?
+      @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
+    end
+
+    if params[:keyword].present?
+      @rooms = @rooms.where(
+        "name LIKE ? OR introduction LIKE ? OR address LIKE ?", 
+        "%#{params[:keyword]}%", 
+        "%#{params[:keyword]}%",
+        "%#{params[:keyword]}%"
+        )
+    end
+  end
+
+  def my_rooms
     @rooms = current_user.rooms
   end
 

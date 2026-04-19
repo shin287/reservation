@@ -13,3 +13,43 @@
  *= require_tree .
  *= require_self
  */
+
+header{
+  background-color: darksalmon;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+#top{
+  background-color: darksalmon;
+}
+
+.top-page{
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 20px;
+  color: black;
+  background-color: aqua;
+  font-size: 24px;
+  border-radius: 16px;
+  font-weight: 700;
+}
+
+.top-page:hover{
+  color: darkorange;
+  transition: 0.3s;
+}
+
+#reservation-index{
+  margin-top: 16px;
+}
+
+.search{
+  margin: 16px 0;
+}
+
+.p{
+  margin: 8px 0;
+}

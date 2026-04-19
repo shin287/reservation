@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "users#new"
+  root "rooms#index"
 
   resources :users, only: [:new, :create, :show, :edit, :update]
   resources :rooms do
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   #施設関連
+    get "my_rooms", to: "rooms#my_rooms"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
