@@ -54,13 +54,12 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_17_141037) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "introduction"
     t.integer "price"
     t.string "address"
     t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
