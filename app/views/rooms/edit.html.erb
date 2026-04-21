@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <h1>施設編集</h1>
+
+  <% if @room.errors.any? %>
+    <ul>
+      <%  @room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @room.image.attached? %>
+    <p>現在の画像</p>
+    <%= image_tag @room.image, size: "200x150" %>
+  <% end %>
+
+  <%= form_with model: @room do |f| %>
+    <p>画像を変更する</p>
+    <%= f.file_field :image %>
+
+    <p>名前</p>
+    <%= f.text_field :name %>
+
+    <p>紹介文</p>
+    <%= f.text_area :introduction %>
+
+    <p>料金</p>
+    <%= f.number_field :price %>
+
+    <p>住所</p>
+    <%= f.text_field :address %>
+
+    <br>
+    <%= f.submit "更新する" %>
+  <% end %>
+
+  <p><%= link_to "詳細へ戻る", room_path(@room) %></p>
+  <br>
+  <p><%= link_to "削除する", room_path(@room), data: {turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %></p>
+<div>

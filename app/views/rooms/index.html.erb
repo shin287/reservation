@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <h1>施設一覧</h1>
+  <% if notice %>
+    <p><%= notice %></p>
+  <% end %>
+
+  <%= form_with url: rooms_path, method: :get, local: true do %>
+    <p class="p">エリア</p>
+    <%= select_tag :area,
+      options_for_select(
+      [["東京","東京都"],["大阪","大阪府"],["京都","京都府"],["札幌","北海道"],],
+      params[:area]
+      ),
+      include_blank: "選択してください" %>
+
+    <p class="p">キーワード</p>
+    <%= text_field_tag :keyword, params[:keyword] %>
+    <br>
+    <%= submit_tag "検索", class: "search" %>
+  <% end %>
+
+  <% if params[:area].present? || params[:keyword].present? %>
+    <p>検索結果： <%= @rooms.count %>件</p>
+  <% end %>
+
+  <div class="row">
+    <% @rooms.each do |room| %>
+      <div class="col-md-4 mb-4">
+
+        <div class="card">
+          <% if room.image.attached? %>
+            <%= image_tag room.image, size: "200x150" %>
+          <% else %>
+            <%= image_tag "room_default.png", size: "200x150" %>
+          <% end %>
+      
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to room.name, room_path(room) %>
+            </h5>
+
+            <p class="card-text">紹介文：<%= room.introduction %></p>
+            <p class="card-text">料金：<%= number_with_delimiter(room.price) %>円/日</p>
+            <p class="card-text">住所：<%= room.address %></p>
+            <p class="card-text">作成日：<%= room.created_at.strftime("%Y/%m/%d") %></p>
+            <hr>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "施設を登録", new_room_path %>
+</div>
