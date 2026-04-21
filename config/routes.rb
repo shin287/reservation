@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show, :edit, :update]
   resources :rooms do
-    resources :reservations, only: [:new, :create]
+    resources :reservations, only: [:new, :create] do
+      collection do
+        post :confirm
+      end
+    end
   end
 
   #プロフィール編集用

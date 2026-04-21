@@ -35,11 +35,11 @@
       <%= image_tag "default.png", size: "150x100" %>
     <% end %>
 
-    <p>施設名： <%= reservation.room.name %></p>
+    <p>施設名： <%= link_to reservation.room.name, room_path(reservation.room) %></p>
     <p>紹介文： <%= reservation.room.introduction %></p>
     <p>合計料金： <%= number_with_delimiter(reservation.total_price) %>円</p>
-    <p>チェックイン： <%= reservation.check_in %></p>
-    <p>チェックアウト： <%= reservation.check_out %></p>
+    <p>チェックイン： <%= reservation.check_in.strftime("%Y/%m/%d") %></p>
+    <p>チェックアウト： <%= reservation.check_out.strftime("%Y/%m/%d") %></p>
     <p>予約確定日時： <%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
   <% end %>
 </div>

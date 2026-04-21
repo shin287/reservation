@@ -13,7 +13,7 @@
     </ul>
   <% end %>
 
-  <%= form_with model: [@room, @reservation] do |f| %>
+  <%= form_with model: [@room, @reservation], url: confirm_room_reservations_path(@room),method: :post, local: true, data: {turbo: false} do |f| %>
     <p class="p">チェックイン</p>
     <%= f.date_field :check_in %>
 
@@ -25,6 +25,6 @@
 
     <br>
     <br>
-    <%= f.submit "予約する" %>
+    <%= f.submit "予約内容を確認する" %>
   <% end %>
 </div>
